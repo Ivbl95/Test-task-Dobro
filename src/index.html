@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fonts/CeraPro/fonts.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" class="container">
+        <section :style="isActivePromo" class="promo">
+            <img class="promo__water" src="img/water.png" alt="water">
+            <div class="promo__header">Чистая Вода</div>
+            <div class="promo__title">
+                Питьевая вода, предназначенная для ежедневного потребления, идеально подходит для кулеров. Закажите доставку воды и мы привезем её на дом или в офис.
+            </div>
+            <button @click="changeToContact" class="promo__btn">Заказать воду</button>
+        </section>
+        <div class="desktop">
+            <section :style="isActiveContact" class="contact">
+                <div class="contact__header">Заполните данные</div>
+                <div class="contact__form">
+                    <div class="contact__firstHalfForm">
+                        <input v-model="name" id="name" class="contact__textInput" type="text" placeholder="ФИО">
+                        <input v-model="phone" id="phone"  class="contact__textInput" type="number" placeholder="Телефон">
+                    </div>
+                    <div class="contact__secondHalfForm">
+                        <input v-model="email" id="email"  class="contact__textInput" type="email" placeholder="Email">
+                        <input v-model="adress" class="contact__textInput" id="adress"  type="text" placeholder="Адрес доставки">
+                    </div>
+                </div>
+                <label class="contact__check"><input v-model="check" class="contact__checkBox" id="check" type="checkbox"><span class="contact__textCheck">Я согласен на <a href="#">обработку персональных данных</a></span></label>
+                <button @click="changeToSelect" class="contact__btn">Далее</button>
+            </section>
+            <section :style="isActiveSelect" class="select">
+                <button @click="changeToContact" class="select__back"><</button>
+                <div class="select__block">
+                    <div class="select__firstHalf">
+                        <div class="select__header">Вода</div>
+                        <div class="select__items">
+                            <div @click="makeActiveChoise1" class="select__item select__itemOne">
+                                <div class="select__volume">
+                                    <div class="select__volume1">18,9 л</div>
+                                    <div class="select__volumeCount">1 шт</div>
+                                </div>
+                                <div class="select__price">220 р</div>
+                                <button :style="isActiveChoise1" class="select__choise"></button>
+                            </div>
+                            <div @click="makeActiveChoise2" class="select__item select__itemTwo">
+                                <div class="select__volume">
+                                    <div class="select__volume1">1,5 л</div>
+                                    <div class="select__volumeCount">6 шт</div>
+                                </div>
+                                <div class="select__price">175 р</div>
+                                <button :style="isActiveChoise2" class="select__choise"></button>
+                            </div>
+                            <div @click="makeActiveChoise3" class="select__item select__itemThree">
+                                <div class="select__volume">
+                                    <div class="select__volume1">0,5 л</div>
+                                    <div class="select__volumeCount">12 шт</div>
+                                </div>
+                                <div class="select__price">270 р</div>
+                                <button :style="isActiveChoise3" class="select__choise"></button>
+                            </div>
+                        </div>
+                        <div class="select__quantity">
+                            <div v-if="page == 1" class="select__count select__count_1">
+                                <button @click="count1Minus" class="select__plusOne">-</button>
+                                <div class="select__bottleCount">{{ count1 }}</div>
+                                <button @click="count1Plus" class="select__minusOne">+</button>
+                            </div>
+                            <div v-else-if="page == 2" class="select__count select__count_2">
+                                <button @click="count2Minus" class="select__plusOne">-</button>
+                                <div class="select__bottleCount">{{ count2 }}</div>
+                                <button @click="count2Plus" class="select__minusOne">+</button>
+                            </div>
+                            <div v-else-if="page == 3" class="select__count select__count_3">
+                                <button @click="count3Minus" class="select__plusOne">-</button>
+                                <div class="select__bottleCount">{{ count3 }}</div>
+                                <button @click="count3Plus" class="select__minusOne">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="select__secondHalf">
+                        <div class="select__date">Дата и время доставки</div>
+                        <div class="select__dayHeader">День</div>
+                        <div class="select__day">
+                            <button @click="order10" :style="order10style" class="select__days">
+                                <div :style="order10style" class="select__number">10</div>
+                                <div :style="order10style" class="select__dayOfWeek">пн</div>
+                            </button>
+                            <button @click="order11" :style="order11style" class="select__days">
+                                <div :style="order11style" class="select__number">11</div>
+                                <div :style="order11style" class="select__dayOfWeek">вт</div>
+                            </button>
+                            <button @click="order12" :style="order12style" class="select__days">
+                                <div :style="order12style" class="select__number">12</div>
+                                <div :style="order12style" class="select__dayOfWeek">ср</div>
+                            </button>
+                            <button @click="order13" :style="order13style" class="select__days">
+                                <div :style="order13style" class="select__number">13</div>
+                                <div :style="order13style" class="select__dayOfWeek">чт</div>
+                            </button>
+                            <button @click="order14" :style="order14style" class="select__days">
+                                <div :style="order14style" class="select__number">14</div>
+                                <div :style="order14style" class="select__dayOfWeek">пт</div>
+                            </button>
+                            <button @click="order15" :style="order15style" class="select__days">
+                                <div :style="order15style" class="select__number">15</div>
+                                <div :style="order15style" class="select__dayOfWeek"><span :style="order15style" class="select__weekend">сб</span></div>
+                            </button>
+                            <button @click="order16" :style="order16style" class="select__days">
+                                <div :style="order16style" class="select__number">16</div>
+                                <div :style="order16style" class="select__dayOfWeek"><span :style="order16style" class="select__weekend">вс</span></div>
+                            </button>
+                            <button @click="order17" :style="order17style" class="select__days">
+                                <div :style="order17style" class="select__number">17</div>
+                                <div :style="order17style" class="select__dayOfWeek">пн</div>
+                            </button>
+                        </div>
+                        <div class="select__timeHeader">Время</div>
+                        <div class="select__times">
+                            <button @click="changeTimeOne" :style="time1" v-if="!wekeend" class="select__timeOClock">10:00 - 11:00</button>
+                            <button @click="changeTimeTwo" :style="time2" class="select__timeOClock">12:00 - 13:00</button>
+                            <button @click="changeTimeThree" :style="time3" class="select__timeOClock">15:00 - 16:00</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="select__fullprice">
+                    <div class="select__fullpriceHeader">Итого</div>
+                    <div class="select__fullpricePrice">{{ price }},<span>00 ₽</span></div>
+                </div>
+                <hr>
+                <button @click="changeToPromo2" class="select__btn">Заказать воду</button>
+            </section>
+            <section :style="isActivePromo2" class="promo2">
+                <div class="promo2__done">
+                    <div class="promo2__round">✓</div>
+                    <div class="promo2__header">Заказ оформлен</div>
+                </div>
+                <div class="promo2__order">
+                    <div class="promo2__howManyWhenAdressPhone">
+                        <div class="promo2__left">{{ finalDescr }}</div>
+                        <div class="promo2__right">{{ finalCount }}</div>
+                    </div>
+                    <div class="promo2__howManyWhenAdressPhone">
+                        <div class="promo2__left">{{ orderDay }} февраля</div>
+                        <div class="promo2__right">{{ finalTime }}</div>
+                    </div>
+                    <div class="promo2__howManyWhenAdressPhone promo2__adress">
+                        <div class="promo2__left">Адрес доставки</div>
+                        <div class="promo2__right">{{ adress }}</div>
+                    </div>
+                    <div class="promo2__howManyWhenAdressPhone">
+                        <div class="promo2__left">Телефон</div>
+                        <div class="promo2__right">{{ phone }}</div>
+                    </div>
+                </div>
+                <div class="select__fullprice">
+                    <div class="select__fullpriceHeader">Итого</div>
+                    <div class="select__fullpricePrice">{{ price }},<span>00 ₽</span></div>
+                </div>
+                <hr>
+                <div class="promo2__finalTitle">
+                    Ваш заказ <a href="#">№221</a> успешно оформлен. В ближайшее время по указанному телефону с Вами свяжется наш менеджер.
+                </div>
+                <button @click="changeToContact" class="promo2__newOrder">Новый заказ</button>
+            </section>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: 'Cera Pro', sans-serif
+body
+    background: #F5F8FF
+@import "promo"
+@import "contact"
+@import "select"
+@import "promo2"
+@media (min-width: 991px)
+    body
+        background: #E9EFFC
+    .container
+        width: 1440px
+        margin: 0 auto
+        display: flex
+    .desktop
+        width: 816px
+        height: 719px
+        background: #F5F8FF
+        border-radius: 6px
+        padding: 40px
+        margin-top: 30px
+    .promo
+        background: #E9EFFC
+        width: 474px
+        padding-top: 224px
+        &__title
+            width: 240px
+            margin: 0 auto
+        &__btn
+            display: none
+    .contact
+        padding: 0
+        &__header
+            font-style: normal
+            font-weight: bold
+            font-size: 24px
+            line-height: 30px
+            color: #455273
+        &__form
+            display: flex
+        &__firstHalfForm
+            width: 328px
+            margin-right: 80px
+        &__secondHalfForm
+            width: 328px
+        &__check
+            justify-content: flex-start
+            margin-bottom: 60px
+        &__btn
+            display: none
+    .select
+        padding: 0
+        margin: 0 0
+        width: 736px
+        &__count_2
+            left: 117px
+        &__count_3
+            left: 234px       
+        &__block
+            display: flex
+        &__firstHalf
+            width: 328px
+            margin-right: 80px
+        &__secondHalf
+            width: 328px
+        &__back
+            display: none
+        &__btn
+            margin: 0 0
+    hr
+        margin-bottom: 50px
+    .promo2
+        padding: 0
+        &__header
+            font-size: 24px
+            line-height: 30px
+        &__order
+            width: 100%
+        &__left
+            font-size: 16px
+        &__right
+            font-size: 14px
+@media (max-width: 990px)
+    .promo
+        width: 100%
+    .contact
+        width: 100%
+        display: none
+    .select
+        display: none
+    .promo2
+        width: 100%
+        display: none
+
+
+    
