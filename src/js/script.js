@@ -45,6 +45,18 @@ var app = new Vue({
         time3: {},
         finalTime: '12:00 - 13:00',
     },
+    computed: {
+        opacity(){
+            return{
+                opacity1: !this.name || !this.phone || !this.email || !this.adress || !this.check
+            };
+        },
+        opacity2(){
+            return{
+                opacity1: !this.name || !this.phone || !this.email || !this.adress || !this.check || this.finalCount == 0
+            };
+        }
+    },
     methods: {
         makeActiveChoise1(){
             this.isActiveChoise1 = {
@@ -330,5 +342,5 @@ var app = new Vue({
             this.time2 = {};
             this.finalTime = '15:00 - 16:00';
         },
-    }
+    },
 });

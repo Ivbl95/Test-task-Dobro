@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <label class="contact__check"><input v-model="check" class="contact__checkBox" id="check" type="checkbox"><span class="contact__textCheck">Я согласен на <a href="#">обработку персональных данных</a></span></label>
-                <button @click="changeToSelect" class="contact__btn">Далее</button>
+                <button :class="opacity" @click="changeToSelect" class="contact__btn">Далее</button>
             </section>
             <section :style="isActiveSelect" class="select">
                 <button @click="changeToContact" class="select__back"><</button>
@@ -132,7 +132,7 @@
                     <div class="select__fullpricePrice">{{ price }},<span>00 ₽</span></div>
                 </div>
                 <hr>
-                <button @click="changeToPromo2" class="select__btn">Заказать воду</button>
+                <button :class="opacity2" @click="changeToPromo2" class="select__btn">Заказать воду</button>
             </section>
             <section :style="isActivePromo2" class="promo2">
                 <div class="promo2__done">
